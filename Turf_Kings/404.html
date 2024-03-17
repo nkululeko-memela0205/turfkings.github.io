@@ -11,35 +11,43 @@
     </style>
     <style data-tag="default-style-sheet">
       html {
-        font-family: IBM Plex Sans Condensed;
-        font-size: 16px;
+        font-family: Open Sans;
+        font-size: 18px;
       }
 
       body {
         font-weight: 400;
         font-style:normal;
         text-decoration: none;
-        text-transform: uppercase;
+        text-transform: none;
         letter-spacing: normal;
-        line-height: 1.5;
-        color: var(--dl-color-scheme-darkblue);
-        background-color: var(--dl-color-scheme-lightgrey);
+        line-height: 1.55;
+        color: var(--dl-color-gray-black);
+        background-color: var(--dl-color-gray-white);
 
       }
     </style>
     <link
-      rel="stylesheet"
-      href="https://unpkg.com/animate.css@4.1.1/animate.css"
+      rel="shortcut icon"
+      href="public/favicon-32x32.png"
+      type="icon/png"
+      sizes="32x32"
     />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&amp;display=swap"
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&amp;display=swap"
       data-tag="font"
     />
     <link
       rel="stylesheet"
-      href="https://unpkg.com/@teleporthq/teleport-custom-scripts/dist/style.css"
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&amp;display=swap"
+      data-tag="font"
     />
+    <style>
+      html {
+      scroll-behavior: smooth;
+      }
+    </style>
   </head>
   <body>
     <link rel="stylesheet" href="./style.css" />
@@ -58,96 +66,6 @@
         </div>
       </div>
     </div>
-    <script
-      defer=""
-      src="https://unpkg.com/@teleporthq/teleport-custom-scripts"
-    ></script>
-    <script defer="">
-      window.onload = () => {
-        const runAllScripts = () => {
-          initializeAllSliders();
-        };
-
-        const listenForUrlChanges = () => {
-          let url = location.href;
-          document.body.addEventListener(
-            "click",
-            () => {
-              requestAnimationFrame(() => {
-                if (url !== location.href) {
-                  runAllScripts();
-                  url = location.href;
-                }
-              });
-            },
-            true
-          );
-        };
-
-        const initializeAllSliders = () => {
-          const allSliders = document.querySelectorAll('[data-type="slider"]');
-          allSliders.forEach((slider) => {
-            initializeSlider(slider);
-          });
-        };
-
-        const initializeSlider = (slider) => {
-          const slides = slider.querySelectorAll('[data-type="slide"]');
-          const middle = Math.ceil(slides.length / 2);
-          let currentSlide = middle;
-
-          const nextSlideBtns = document.querySelectorAll(
-            '[data-action="nextSlide"]'
-          );
-          const previousSlideBtns = document.querySelectorAll(
-            '[data-action="previousSlide"]'
-          );
-
-          const changeSlide = (slideIndex, action) => {
-            currentSlide = slideIndex;
-
-            switch (action) {
-              case "next":
-                slideIndex === slides.length
-                  ? (currentSlide = 1)
-                  : currentSlide++;
-                break;
-              case "previous":
-                slideIndex === 1
-                  ? (currentSlide = slides.length)
-                  : currentSlide--;
-            }
-
-            const slide = slides[0];
-            if (!slide) {
-              console.error("No slides present");
-              return;
-            }
-            const style = window.getComputedStyle(slide);
-            slideWidth =
-              parseInt(style.width) +
-              parseInt(style.marginLeft) +
-              parseInt(style.marginRight);
-            const transformValue = -slideWidth * (currentSlide - middle);
-
-            slider.style.transform = `translateX(${transformValue}px)`;
-          };
-
-          previousSlideBtns.forEach((btn) => {
-            btn.addEventListener("click", () =>
-              changeSlide(currentSlide, "previous")
-            );
-          });
-
-          nextSlideBtns.forEach((btn) => {
-            btn.addEventListener("click", () =>
-              changeSlide(currentSlide, "next")
-            );
-          });
-        };
-
-        runAllScripts();
-      };
-    </script>
+    <script src="https://unpkg.com/@teleporthq/teleport-custom-scripts"></script>
   </body>
 </html>
